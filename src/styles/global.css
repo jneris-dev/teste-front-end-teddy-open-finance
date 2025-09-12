@@ -2,5 +2,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-roboto: "Inter", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-teddy-50: #fef6ee;
+  --color-teddy-100: #fdead7;
+  --color-teddy-200: #f9d1af;
+  --color-teddy-300: #f5b17c;
+  --color-teddy-400: #f08647;
+  --color-teddy-500: #ec6724;
+  --color-teddy-600: #dd4d19;
+  --color-teddy-700: #b83916;
+  --color-teddy-800: #922f1a;
+  --color-teddy-900: #762918;
+  --color-teddy-950: #40120a;
+}
+
+body {
+  @apply bg-white text-stone-900 relative w-full min-h-screen;
+  font-family: var(--font-inter);
 }
