@@ -1,0 +1,12 @@
+import type { Client } from "./client_interface";
+
+export type ModuleTypes = "createClient" | "editClient" | "deleteClient" | "";
+
+export interface ModalProps {
+  title?: string | null;
+  onClose: () => void;
+  onSubmit: (data: any) => void;
+  module: ModuleTypes;
+  description?: string | null;
+  data?: Client | null;
+}
