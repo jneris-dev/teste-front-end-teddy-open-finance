@@ -1,4 +1,4 @@
-import type { ClientResponse } from "./client_interface";
+import type { Client } from "./client_interface";
 
 export type ModuleTypes =
   | "createClient"
@@ -12,7 +12,7 @@ export interface ModalProps {
   onSubmit: (data: any) => void;
   module: ModuleTypes;
   description?: string | null;
-  data?: ClientResponse | null;
+  data?: Client | null;
 }
 
 export interface ShowModalState {

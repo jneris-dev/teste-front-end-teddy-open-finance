@@ -6,11 +6,11 @@ import {
   type ReactElement,
 } from "react";
 
-import type { AppContextData } from "../interfaces/app_interface";
+import type { AppContextData, Filters } from "../interfaces/app_interface";
 import type { ShowModalState } from "../interfaces/modal_interface";
 
 import api from "../services/api";
-import type { ClientResponse } from "../interfaces/client_interface";
+import type { UsersResponse } from "../interfaces/client_interface";
 
 interface AppContextProps {
   children: ReactElement;
@@ -60,18 +60,23 @@ export function AppContextProvider({ children }: AppContextProps) {
     rootElement.classList.add(nextTheme);
   }, [showModal]);
 
-  const [clients, setClients] = useState([] as ClientResponse[]);
-  const [loadingClients, setLoadingClients] = useState(false);
+  const [filters, setFilters] = useState({
+    page: 1,
+    limit: 10,
+  } as Filters);
+
+  const [users, setUsers] = useState({} as UsersResponse);
+  const [loadingUsers, setLoadingUsers] = useState(false);
 
   useEffect(() => {
-    if (loadingClients) {
-      setClients([] as ClientResponse[]);
+    if (loadingUsers) {
+      setUsers({} as UsersResponse);
       const fetchData = async () => {
         api
-          .get(`/users?page=1&limit=10`)
+          .get(`/users?page=${filters.page}&limit=${filters.limit}`)
           .then((response) => {
-            setClients(response.data.clients);
-            setLoadingClients(false);
+            setUsers(response.data);
+            setLoadingUsers(false);
           })
           .catch((err) => {
             console.log(err);
@@ -80,7 +85,7 @@ export function AppContextProvider({ children }: AppContextProps) {
 
       fetchData().catch(console.error);
     }
-  }, [loadingClients]);
+  }, [loadingUsers]);
 
   return (
     <AppContext.Provider
@@ -92,9 +97,12 @@ export function AppContextProvider({ children }: AppContextProps) {
         showModal,
         setShowModal,
 
-        clients,
-        loadingClients,
-        setLoadingClients,
+        filters,
+        setFilters,
+
+        users,
+        loadingUsers,
+        setLoadingUsers,
       }}
     >
       {children}

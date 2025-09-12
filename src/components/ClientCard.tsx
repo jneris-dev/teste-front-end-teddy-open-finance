@@ -6,16 +6,16 @@ import {
 } from "@phosphor-icons/react";
 
 import { useAppContext } from "../context/AppContext";
-import type { ClientResponse } from "../interfaces/client_interface";
+import type { Client } from "../interfaces/client_interface";
 import { toCurrencyBRL } from "../util/formats";
 
 type ClientModuleType = "add" | "edit" | "delete" | "remove";
 interface ClientProps {
   modules: ClientModuleType[];
-  client: ClientResponse;
+  client: Client;
 }
 
-function Client({ modules, client }: ClientProps) {
+function ClientCard({ modules, client }: ClientProps) {
   let mods = modules;
   const { setShowModal } = useAppContext();
 
@@ -109,4 +109,4 @@ function Client({ modules, client }: ClientProps) {
   );
 }
 
-export default Client;
+export default ClientCard;

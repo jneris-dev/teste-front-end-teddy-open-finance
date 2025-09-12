@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import Client from "../components/Client";
+import ClientCard from "../components/ClientCard";
 import Button from "../components/Button";
 
 const mokedClients = [
@@ -38,7 +38,11 @@ function SelectedClients() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {mokedClients.map((client, index) => {
                   return (
-                    <Client key={index} modules={["remove"]} client={client} />
+                    <ClientCard
+                      key={index}
+                      modules={["remove"]}
+                      client={client}
+                    />
                   );
                 })}
               </div>

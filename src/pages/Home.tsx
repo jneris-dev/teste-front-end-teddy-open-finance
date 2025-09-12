@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import Client from "../components/Client";
+import ClientCard from "../components/ClientCard";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
@@ -10,13 +10,14 @@ import { useAppContext } from "../context/AppContext";
 
 function Home() {
   let location = useLocation();
-  const { clients, setLoadingClients, setShowModal } = useAppContext();
+  const { users, setLoadingUsers, setShowModal, filters, setFilters } =
+    useAppContext();
 
   useEffect(() => {
     if (location) {
-      setLoadingClients(true);
+      setLoadingUsers(true);
     }
-  }, [location]);
+  }, [location, filters]);
 
   return (
     <Layout>
@@ -28,7 +29,8 @@ function Home() {
               <div className="flex xs:flex-row flex-col gap-2 items-center justify-between">
                 <div className="flex items-center gap-2">
                   <p>
-                    <strong>16</strong> clientes encontrados:
+                    <strong>{users.clients?.length}</strong> clientes
+                    encontrados:
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -37,6 +39,14 @@ function Home() {
                     name="perPage"
                     id="perPage"
                     className="border border-stone-300 rounded p-1 outline-0 focus:border-teddy-500 cursor-pointer text-sm"
+                    value={filters.limit}
+                    onChange={(e) =>
+                      setFilters({
+                        ...filters,
+                        limit: Number(e.target.value),
+                        page: 1,
+                      })
+                    }
                   >
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -46,9 +56,9 @@ function Home() {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {clients.map((client, index) => {
+                {users.clients?.map((client, index) => {
                   return (
-                    <Client
+                    <ClientCard
                       key={index}
                       modules={["add", "edit", "delete"]}
                       client={client}
