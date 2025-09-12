@@ -17,6 +17,8 @@ export interface AppContextData {
   setLoadingUsers: (loading: boolean) => void;
 
   handleCreateClient: (data: Client) => void;
+  handleEditClient: (id: number, data: Client) => void;
+  handleDeleteClient: (id: number) => void;
 }
 
 export interface Filters {

@@ -5,11 +5,17 @@ import { useAppContext } from "../context/AppContext";
 import type { Client } from "../interfaces/client_interface";
 
 function Modal() {
-  const { showModal, setShowModal, handleCreateClient } = useAppContext();
+  const {
+    showModal,
+    setShowModal,
+    handleCreateClient,
+    handleEditClient,
+    handleDeleteClient,
+  } = useAppContext();
 
   if (!showModal.modal || !showModal.show) return null;
 
-  const { title, onSubmit, module, description, data } = showModal.modal;
+  const { title, module, description, data } = showModal.modal;
 
   const [formClient, setFormClient] = useState<Client>({
     name: "",
@@ -17,17 +23,24 @@ function Modal() {
     companyValuation: "",
   });
 
-  const submitForm = (event: FormEvent) => {
+  function submitForm(event: FormEvent) {
     event.preventDefault();
 
-    handleCreateClient(formClient);
+    if (module === "createClient") handleCreateClient(formClient);
+
+    if (module === "editClient" && data)
+      handleEditClient(Number(data.id), formClient);
+
     setShowModal({ show: false, modal: null });
-  };
+  }
+
+  function deleteClient(id: number) {
+    handleDeleteClient(id);
+    setShowModal({ show: false, modal: null });
+  }
 
   useEffect(() => {
-    if (data) {
-      setFormClient(data);
-    }
+    if (data) setFormClient(data);
   }, [data]);
 
   return (
@@ -98,7 +111,11 @@ function Modal() {
               />
               <input
                 type="submit"
-                value="Criar cliente"
+                value={
+                  module === "createClient"
+                    ? "Criar cliente"
+                    : "Salvar alterações"
+                }
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
               />
             </form>
@@ -108,7 +125,7 @@ function Modal() {
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
-                onClick={() => onSubmit && onSubmit(data?.id)}
+                onClick={() => data && deleteClient(Number(data.id))}
               >
                 Excluir cliente
               </button>

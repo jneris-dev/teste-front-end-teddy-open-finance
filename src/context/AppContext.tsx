@@ -26,7 +26,6 @@ export function AppContextProvider({ children }: AppContextProps) {
       module: "",
       data: null,
       description: null,
-      onSubmit: () => {},
       title: null,
     },
   });
@@ -92,6 +91,31 @@ export function AppContextProvider({ children }: AppContextProps) {
       .post(`/users`, data)
       .then((response) => {
         console.log(response);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  async function handleEditClient(id: number, data: Client) {
+    await api
+      .patch(`/users/${id}`, data)
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  async function handleDeleteClient(id: number) {
+    await api
+      .delete(`/users/${id}`)
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -116,6 +140,8 @@ export function AppContextProvider({ children }: AppContextProps) {
         setLoadingUsers,
 
         handleCreateClient,
+        handleEditClient,
+        handleDeleteClient,
       }}
     >
       {children}

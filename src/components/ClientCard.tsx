@@ -28,8 +28,8 @@ function ClientCard({ modules, client }: ClientProps) {
         {client.name}
       </strong>
       <div className="flex flex-col gap-1 text-center">
-        <p>Salário: {toCurrencyBRL(client.salary)}</p>
-        <p>Empresa: {toCurrencyBRL(client.companyValuation)}</p>
+        <p>Salário: {toCurrencyBRL(Number(client.salary))}</p>
+        <p>Empresa: {toCurrencyBRL(Number(client.companyValuation))}</p>
       </div>
       <div
         className={
@@ -46,7 +46,6 @@ function ClientCard({ modules, client }: ClientProps) {
                 show: true,
                 modal: {
                   module: "saveClient",
-                  onSubmit: () => {},
                   description:
                     "Cliente " +
                     client.name +
@@ -68,7 +67,6 @@ function ClientCard({ modules, client }: ClientProps) {
                 show: true,
                 modal: {
                   module: "editClient",
-                  onSubmit: () => {},
                   data: client,
                 },
               })
@@ -86,9 +84,9 @@ function ClientCard({ modules, client }: ClientProps) {
                 show: true,
                 modal: {
                   module: "deleteClient",
-                  onSubmit: () => {},
                   description:
                     "Você está prestes a excluir o cliente: " + client.name,
+                  data: client,
                 },
               })
             }
