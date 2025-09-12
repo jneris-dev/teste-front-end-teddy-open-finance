@@ -1,11 +1,17 @@
 import { ListIcon } from "@phosphor-icons/react/dist/ssr";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
+  let location = useLocation();
+
   return (
     <header className="w-full h-auto p-4 bg-white shadow z-10 relative">
       <nav className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <button type="button" className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer md:hidden">
+          <button
+            type="button"
+            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer md:hidden"
+          >
             <ListIcon size={24} className="text-stone-600" />
           </button>
           <img
@@ -16,29 +22,36 @@ function Header() {
         </div>
         <div className="md:flex hidden">
           <ul className="flex items-center gap-8">
-            <li className="group active">
-              <a
-                href=""
+            <li
+              className={"group" + (location.pathname === "/" ? " active" : "")}
+            >
+              <Link
+                to="/"
                 className="border-b border-transparent hover:border-teddy-500 hover:text-teddy-500 group-[.active]:border-teddy-500 group-[.active]:text-teddy-500"
               >
                 Clientes
-              </a>
+              </Link>
             </li>
-            <li className="group">
-              <a
-                href=""
+            <li
+              className={
+                "group" +
+                (location.pathname === "/selected-clients" ? " active" : "")
+              }
+            >
+              <Link
+                to="/selected-clients"
                 className="border-b border-transparent hover:border-teddy-500 hover:text-teddy-500 group-[.active]:border-teddy-500 group-[.active]:text-teddy-500"
               >
                 Clientes selecionados
-              </a>
+              </Link>
             </li>
             <li className="group">
-              <a
-                href=""
-                className="border-b border-transparent hover:border-teddy-500 hover:text-teddy-500 group-[.active]:border-teddy-500 group-[.active]:text-teddy-500"
+              <button
+                type="button"
+                className="border-b border-transparent hover:border-teddy-500 hover:text-teddy-500 group-[.active]:border-teddy-500 group-[.active]:text-teddy-500 cursor-pointer"
               >
                 Sair
-              </a>
+              </button>
             </li>
           </ul>
         </div>

@@ -3,19 +3,21 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Welcome from "../pages/Welcome";
+import SelectedClients from "../pages/SelectedClients";
 
 export function Router() {
-	const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-	return (
-		<Routes>
+  return (
+    <Routes>
       <Route path="*" element={<Navigate replace to="/" />} />
-      <Route path="/welcome" element={<Welcome />} />
       <Route path="/" element={<Home />} />
-		</Routes>
-	);
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/selected-clients" element={<SelectedClients />} />
+    </Routes>
+  );
 }

@@ -1,6 +1,18 @@
-import { PencilIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react";
+import {
+  MinusIcon,
+  PencilIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@phosphor-icons/react";
 
-function Client() {
+type ClientModuleType = "add" | "edit" | "delete" | "remove";
+interface ClientProps {
+  modules: ClientModuleType[];
+}
+
+function Client({ modules }: ClientProps) {
+  let mods = modules;
+
   return (
     <div className="bg-white p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
       <strong className="text-xl">Eduardo</strong>
@@ -8,25 +20,44 @@ function Client() {
         <p>Salário: R$3.500,00</p>
         <p>Empresa: R$120.000,00</p>
       </div>
-      <div className="w-full flex items-center justify-between gap-4">
-        <button
-          type="button"
-          className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
-        >
-          <PlusIcon size={24} />
-        </button>
-        <button
-          type="button"
-          className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
-        >
-          <PencilIcon size={24} />
-        </button>
-        <button
-          type="button"
-          className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
-        >
-          <TrashIcon size={24} className="text-red-500" />
-        </button>
+      <div
+        className={
+          "w-full flex items-center gap-4" +
+          (modules.length === 1 ? " justify-end" : " justify-between")
+        }
+      >
+        {mods.includes("add") && (
+          <button
+            type="button"
+            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+          >
+            <PlusIcon size={24} />
+          </button>
+        )}
+        {mods.includes("edit") && (
+          <button
+            type="button"
+            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+          >
+            <PencilIcon size={24} />
+          </button>
+        )}
+        {mods.includes("delete") && (
+          <button
+            type="button"
+            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+          >
+            <TrashIcon size={24} className="text-red-500" />
+          </button>
+        )}
+        {mods.includes("remove") && (
+          <button
+            type="button"
+            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+          >
+            <MinusIcon size={24} className="text-teddy-500" />
+          </button>
+        )}
       </div>
     </div>
   );
