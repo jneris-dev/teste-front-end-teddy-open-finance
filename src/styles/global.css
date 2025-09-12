@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 30rem;
   --font-inter: "Inter", sans-serif;
 
   --color-teddy-50: #fef6ee;
