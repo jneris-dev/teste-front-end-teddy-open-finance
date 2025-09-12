@@ -9,7 +9,7 @@ export type ModuleTypes =
 
 export interface ModalProps {
   title?: string | null;
-  onSubmit: (data: any) => void;
+  onSubmit?: (data: any) => void;
   module: ModuleTypes;
   description?: string | null;
   data?: Client | null;

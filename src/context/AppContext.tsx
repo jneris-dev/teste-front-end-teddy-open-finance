@@ -10,7 +10,7 @@ import type { AppContextData, Filters } from "../interfaces/app_interface";
 import type { ShowModalState } from "../interfaces/modal_interface";
 
 import api from "../services/api";
-import type { UsersResponse } from "../interfaces/client_interface";
+import type { Client, UsersResponse } from "../interfaces/client_interface";
 
 interface AppContextProps {
   children: ReactElement;
@@ -62,7 +62,7 @@ export function AppContextProvider({ children }: AppContextProps) {
 
   const [filters, setFilters] = useState({
     page: 1,
-    limit: 10,
+    limit: 16,
   } as Filters);
 
   const [users, setUsers] = useState({} as UsersResponse);
@@ -87,6 +87,17 @@ export function AppContextProvider({ children }: AppContextProps) {
     }
   }, [loadingUsers]);
 
+  async function handleCreateClient(data: Client) {
+    await api
+      .post(`/users`, data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -103,6 +114,8 @@ export function AppContextProvider({ children }: AppContextProps) {
         users,
         loadingUsers,
         setLoadingUsers,
+
+        handleCreateClient,
       }}
     >
       {children}

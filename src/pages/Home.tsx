@@ -29,8 +29,12 @@ function Home() {
               <div className="flex xs:flex-row flex-col gap-2 items-center justify-between">
                 <div className="flex items-center gap-2">
                   <p>
-                    <strong>{users.clients?.length}</strong> clientes
-                    encontrados:
+                    <strong>
+                      {users.clients
+                        ? users.clients.length * users.totalPages
+                        : "--"}
+                    </strong>{" "}
+                    clientes encontrados:
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -48,10 +52,10 @@ function Home() {
                       })
                     }
                   >
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                    <option value="64">64</option>
+                    <option value="128">128</option>
                   </select>
                 </div>
               </div>
@@ -76,7 +80,6 @@ function Home() {
                     show: true,
                     modal: {
                       module: "createClient",
-                      onSubmit: () => {},
                     },
                   })
                 }

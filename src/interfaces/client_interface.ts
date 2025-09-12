@@ -1,8 +1,8 @@
 export interface Client {
-  id: number;
+  id?: number;
   name: string;
-  salary: number;
-  companyValuation: number;
+  salary: number | string;
+  companyValuation: number | string;
   createdAt?: string;
   updatedAt?: string;
 }

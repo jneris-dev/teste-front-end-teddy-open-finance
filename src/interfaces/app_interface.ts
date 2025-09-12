@@ -1,4 +1,4 @@
-import type { UsersResponse } from "./client_interface";
+import type { Client, UsersResponse } from "./client_interface";
 import type { ShowModalState } from "./modal_interface";
 
 export interface AppContextData {
@@ -15,6 +15,8 @@ export interface AppContextData {
   users: UsersResponse;
   loadingUsers: boolean;
   setLoadingUsers: (loading: boolean) => void;
+
+  handleCreateClient: (data: Client) => void;
 }
 
 export interface Filters {
