@@ -5,6 +5,8 @@ import {
   TrashIcon,
 } from "@phosphor-icons/react";
 
+import { useAppContext } from "../context/AppContext";
+
 type ClientModuleType = "add" | "edit" | "delete" | "remove";
 interface ClientProps {
   modules: ClientModuleType[];
@@ -12,6 +14,7 @@ interface ClientProps {
 
 function Client({ modules }: ClientProps) {
   let mods = modules;
+  const { setShowModal } = useAppContext();
 
   return (
     <div className="bg-white p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
@@ -30,6 +33,15 @@ function Client({ modules }: ClientProps) {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            onClick={() =>
+              setShowModal({
+                show: true,
+                modal: {
+                  module: "createClient",
+                  onSubmit: () => {},
+                },
+              })
+            }
           >
             <PlusIcon size={24} />
           </button>
@@ -38,6 +50,15 @@ function Client({ modules }: ClientProps) {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            onClick={() =>
+              setShowModal({
+                show: true,
+                modal: {
+                  module: "editClient",
+                  onSubmit: () => {},
+                },
+              })
+            }
           >
             <PencilIcon size={24} />
           </button>
@@ -46,6 +67,16 @@ function Client({ modules }: ClientProps) {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            onClick={() =>
+              setShowModal({
+                show: true,
+                modal: {
+                  module: "deleteClient",
+                  onSubmit: () => {},
+                  description: "Você está prestes a excluir o cliente: Eduardo",
+                },
+              })
+            }
           >
             <TrashIcon size={24} className="text-red-500" />
           </button>

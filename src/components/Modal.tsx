@@ -1,15 +1,14 @@
 import { XIcon } from "@phosphor-icons/react";
 
-import type { ModalProps } from "../interfaces/modal_interface";
+import { useAppContext } from "../context/AppContext";
 
-function Modal({
-  title,
-  onClose,
-  onSubmit,
-  module,
-  description,
-  data,
-}: ModalProps) {
+function Modal() {
+  const { showModal, setShowModal } = useAppContext();
+
+  if (!showModal.modal || !showModal.show) return null;
+
+  const { title, onSubmit, module, description, data } = showModal.modal;
+
   return (
     <div className="modal fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
       <div className="w-full max-w-md bg-white pt-4 p-6 rounded-lg shadow-lg space-y-4 relative">
@@ -26,7 +25,7 @@ function Modal({
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer"
-            onClick={onClose}
+            onClick={() => setShowModal({ show: false, modal: null })}
           >
             <XIcon size={20} weight="bold" />
           </button>
@@ -47,16 +46,16 @@ function Modal({
               />
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="salary"
+                id="salary"
                 placeholder="Digite o salário:"
                 className="px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors"
                 value={data?.salary || ""}
               />
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="companyValuation"
+                id="companyValuation"
                 placeholder="Digite o valor da empresa:"
                 className="px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors"
                 value={data?.companyValuation || ""}
