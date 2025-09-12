@@ -9,6 +9,9 @@ import {
 import type { AppContextData } from "../interfaces/app_interface";
 import type { ShowModalState } from "../interfaces/modal_interface";
 
+import api from "../services/api";
+import type { ClientResponse } from "../interfaces/client_interface";
+
 interface AppContextProps {
   children: ReactElement;
 }
@@ -57,6 +60,28 @@ export function AppContextProvider({ children }: AppContextProps) {
     rootElement.classList.add(nextTheme);
   }, [showModal]);
 
+  const [clients, setClients] = useState([] as ClientResponse[]);
+  const [loadingClients, setLoadingClients] = useState(false);
+
+  useEffect(() => {
+    if (loadingClients) {
+      setClients([] as ClientResponse[]);
+      const fetchData = async () => {
+        api
+          .get(`/users?page=1&limit=10`)
+          .then((response) => {
+            setClients(response.data.clients);
+            setLoadingClients(false);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+
+      fetchData().catch(console.error);
+    }
+  }, [loadingClients]);
+
   return (
     <AppContext.Provider
       value={{
@@ -66,6 +91,10 @@ export function AppContextProvider({ children }: AppContextProps) {
         setLoadingScreen,
         showModal,
         setShowModal,
+
+        clients,
+        loadingClients,
+        setLoadingClients,
       }}
     >
       {children}

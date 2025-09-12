@@ -1,9 +1,23 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import Client from "../components/Client";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
 
+import { useAppContext } from "../context/AppContext";
+
 function Home() {
+  let location = useLocation();
+  const { clients, setLoadingClients, setShowModal } = useAppContext();
+
+  useEffect(() => {
+    if (location) {
+      setLoadingClients(true);
+    }
+  }, [location]);
+
   return (
     <Layout>
       <section className="home relative w-full h-auto">
@@ -32,9 +46,13 @@ function Home() {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[...Array(16)].map((_, index) => {
+                {clients.map((client, index) => {
                   return (
-                    <Client key={index} modules={["add", "edit", "delete"]} />
+                    <Client
+                      key={index}
+                      modules={["add", "edit", "delete"]}
+                      client={client}
+                    />
                   );
                 })}
               </div>
@@ -43,6 +61,15 @@ function Home() {
               <button
                 type="button"
                 className="w-full h-10 items-center justify-center bg-transparent border-2 border-teddy-500 text-teddy-500 rounded hover:bg-teddy-500 hover:text-white transition-colors flex gap-2 font-bold cursor-pointer"
+                onClick={() =>
+                  setShowModal({
+                    show: true,
+                    modal: {
+                      module: "createClient",
+                      onSubmit: () => {},
+                    },
+                  })
+                }
               >
                 Criar cliente
               </button>

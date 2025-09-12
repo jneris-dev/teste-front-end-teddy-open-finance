@@ -1,4 +1,4 @@
-export interface Client {
+export interface ClientResponse {
   id: number;
   name: string;
   salary: number;

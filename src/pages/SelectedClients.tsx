@@ -3,6 +3,25 @@ import Header from "../components/Header";
 import Client from "../components/Client";
 import Button from "../components/Button";
 
+const mokedClients = [
+  {
+    id: 327,
+    name: "Test Timeout",
+    salary: 120,
+    companyValuation: 1500000,
+    createdAt: "2025-09-07T14:58:43.008Z",
+    updatedAt: "2025-09-07T14:58:43.008Z",
+  },
+  {
+    id: 328,
+    name: "Ralf",
+    salary: 140,
+    companyValuation: 18000,
+    createdAt: "2025-09-07T15:13:10.177Z",
+    updatedAt: "2025-09-07T15:13:10.177Z",
+  },
+];
+
 function SelectedClients() {
   return (
     <Layout>
@@ -17,8 +36,10 @@ function SelectedClients() {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[...Array(8)].map((_, index) => {
-                  return <Client key={index} modules={["remove"]} />;
+                {mokedClients.map((client, index) => {
+                  return (
+                    <Client key={index} modules={["remove"]} client={client} />
+                  );
                 })}
               </div>
             </div>

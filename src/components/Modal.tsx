@@ -77,6 +77,17 @@ function Modal() {
                 Excluir cliente
               </button>
             </div>
+          ) : module === "saveClient" ? (
+            <div className="w-full h-auto flex flex-col gap-4">
+              <p className="text-stone-600">{description}</p>
+              <button
+                type="button"
+                className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
+                onClick={() => setShowModal({ show: false, modal: null })}
+              >
+                Entendi
+              </button>
+            </div>
           ) : null}
         </div>
       </div>

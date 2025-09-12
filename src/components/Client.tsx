@@ -6,22 +6,30 @@ import {
 } from "@phosphor-icons/react";
 
 import { useAppContext } from "../context/AppContext";
+import type { ClientResponse } from "../interfaces/client_interface";
+import { toCurrencyBRL } from "../util/formats";
 
 type ClientModuleType = "add" | "edit" | "delete" | "remove";
 interface ClientProps {
   modules: ClientModuleType[];
+  client: ClientResponse;
 }
 
-function Client({ modules }: ClientProps) {
+function Client({ modules, client }: ClientProps) {
   let mods = modules;
   const { setShowModal } = useAppContext();
 
   return (
     <div className="bg-white p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
-      <strong className="text-xl">Eduardo</strong>
+      <strong
+        className="text-xl truncate w-full text-center"
+        title={client.name}
+      >
+        {client.name}
+      </strong>
       <div className="flex flex-col gap-1 text-center">
-        <p>Salário: R$3.500,00</p>
-        <p>Empresa: R$120.000,00</p>
+        <p>Salário: {toCurrencyBRL(client.salary)}</p>
+        <p>Empresa: {toCurrencyBRL(client.companyValuation)}</p>
       </div>
       <div
         className={
@@ -37,8 +45,13 @@ function Client({ modules }: ClientProps) {
               setShowModal({
                 show: true,
                 modal: {
-                  module: "createClient",
+                  module: "saveClient",
                   onSubmit: () => {},
+                  description:
+                    "Cliente " +
+                    client.name +
+                    " adicionado aos selecionados com sucesso!",
+                  title: "Cliente selecionado",
                 },
               })
             }
@@ -56,6 +69,7 @@ function Client({ modules }: ClientProps) {
                 modal: {
                   module: "editClient",
                   onSubmit: () => {},
+                  data: client,
                 },
               })
             }
@@ -73,7 +87,8 @@ function Client({ modules }: ClientProps) {
                 modal: {
                   module: "deleteClient",
                   onSubmit: () => {},
-                  description: "Você está prestes a excluir o cliente: Eduardo",
+                  description:
+                    "Você está prestes a excluir o cliente: " + client.name,
                 },
               })
             }
