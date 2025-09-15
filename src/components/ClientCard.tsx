@@ -17,7 +17,8 @@ interface ClientProps {
 
 function ClientCard({ modules, client }: ClientProps) {
   let mods = modules;
-  const { setShowModal } = useAppContext();
+  const { setShowModal, handleSelectedClient, handleRemoveClient } =
+    useAppContext();
 
   return (
     <div className="bg-white p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
@@ -41,7 +42,8 @@ function ClientCard({ modules, client }: ClientProps) {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
-            onClick={() =>
+            onClick={() => {
+              handleSelectedClient(client);
               setShowModal({
                 show: true,
                 modal: {
@@ -52,8 +54,8 @@ function ClientCard({ modules, client }: ClientProps) {
                     " adicionado aos selecionados com sucesso!",
                   title: "Cliente selecionado",
                 },
-              })
-            }
+              });
+            }}
           >
             <PlusIcon size={24} />
           </button>
@@ -98,6 +100,20 @@ function ClientCard({ modules, client }: ClientProps) {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            onClick={() => {
+              handleRemoveClient(String(client.id));
+              setShowModal({
+                show: true,
+                modal: {
+                  module: "saveClient",
+                  description:
+                    "Cliente " +
+                    client.name +
+                    " removido dos selecionados com sucesso!",
+                  title: "Cliente removido",
+                },
+              });
+            }}
           >
             <MinusIcon size={24} className="text-teddy-500" />
           </button>

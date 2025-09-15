@@ -23,6 +23,9 @@ export interface AppContextData {
   handleCreateClient: (data: Client) => void;
   handleEditClient: (id: number, data: Client) => void;
   handleDeleteClient: (id: number) => void;
+  handleSelectedClient: (client: Client) => void;
+  handleRemoveClient: (clientId: string) => void;
+  handleClearClients: () => void;
 }
 
 export interface Filters {

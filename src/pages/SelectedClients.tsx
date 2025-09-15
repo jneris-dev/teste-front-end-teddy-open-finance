@@ -2,27 +2,11 @@ import Layout from "../components/Layout";
 import Header from "../components/Header";
 import ClientCard from "../components/ClientCard";
 import Button from "../components/Button";
-
-const mokedClients = [
-  {
-    id: 327,
-    name: "Test Timeout",
-    salary: 120,
-    companyValuation: 1500000,
-    createdAt: "2025-09-07T14:58:43.008Z",
-    updatedAt: "2025-09-07T14:58:43.008Z",
-  },
-  {
-    id: 328,
-    name: "Ralf",
-    salary: 140,
-    companyValuation: 18000,
-    createdAt: "2025-09-07T15:13:10.177Z",
-    updatedAt: "2025-09-07T15:13:10.177Z",
-  },
-];
+import { useAppContext } from "../context/AppContext";
 
 function SelectedClients() {
+  const { auth, handleClearClients } = useAppContext();
+
   return (
     <Layout>
       <section className="selected-clients relative w-full h-auto">
@@ -35,25 +19,32 @@ function SelectedClients() {
                   <h1 className="text-xl font-bold">Clientes selecionados:</h1>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {mokedClients.map((client, index) => {
-                  return (
-                    <ClientCard
-                      key={index}
-                      modules={["remove"]}
-                      client={client}
-                    />
-                  );
-                })}
-              </div>
+              {auth && auth.clients.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {auth.clients.map((client, index) => {
+                    return (
+                      <ClientCard
+                        key={index}
+                        modules={["remove"]}
+                        client={client}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <p>Você não possui clientes selecionados.</p>
+              )}
             </div>
             <div className="w-full h-auto flex items-center justify-center">
               <Button
                 type="button"
-                onPress={() => {}}
+                onPress={handleClearClients}
                 label="Limpar clientes selecionados"
-                style="outline"
+                variant="outline"
                 classes="h-10"
+                disabled={
+                  auth ? (auth.clients.length > 0 ? false : true) : true
+                }
               />
             </div>
           </div>

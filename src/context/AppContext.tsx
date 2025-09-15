@@ -199,6 +199,92 @@ export function AppContextProvider({ children }: AppContextProps) {
       });
   }
 
+  function handleSelectedClient(client: Client) {
+    const storedAuth = localStorage.getItem("authData");
+
+    if (storedAuth) {
+      try {
+        const currentAuth: Auth = JSON.parse(storedAuth);
+        const clientsCopy = [...currentAuth.clients];
+        const clientIndex = clientsCopy.findIndex(
+          (c: Client) => c.id === client.id
+        );
+
+        let updatedClients;
+
+        if (clientIndex > -1) {
+          clientsCopy[clientIndex] = client;
+          updatedClients = clientsCopy;
+        } else {
+          updatedClients = [...clientsCopy, client];
+        }
+
+        const updatedAuth: Auth = {
+          ...currentAuth,
+          clients: updatedClients,
+        };
+
+        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        setAuth(updatedAuth);
+      } catch (e) {
+        console.error(
+          "Erro ao ler/escrever dados do localStorage para o cliente",
+          e
+        );
+      }
+    }
+  }
+
+  function handleRemoveClient(clientId: string) {
+    const storedAuth = localStorage.getItem("authData");
+
+    if (storedAuth) {
+      try {
+        const currentAuth: Auth = JSON.parse(storedAuth);
+
+        const updatedClients = currentAuth.clients.filter(
+          (c: Client) => c.id !== Number(clientId)
+        );
+
+        const updatedAuth: Auth = {
+          ...currentAuth,
+          clients: updatedClients,
+        };
+
+        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        setAuth(updatedAuth);
+      } catch (e) {
+        console.error(
+          "Erro ao ler/escrever dados do localStorage para remover o cliente",
+          e
+        );
+      }
+    }
+  }
+
+  function handleClearClients() {
+    const storedAuth = localStorage.getItem("authData");
+
+    if (storedAuth) {
+      try {
+        const currentAuth: Auth = JSON.parse(storedAuth);
+
+        const updatedAuth: Auth = {
+          ...currentAuth,
+          clients: [],
+        };
+
+        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        setAuth(updatedAuth);
+      } catch (e) {
+        console.error(
+          "Erro ao ler/escrever dados do localStorage para limpar os clientes",
+          e
+        );
+      }
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -223,6 +309,9 @@ export function AppContextProvider({ children }: AppContextProps) {
         handleCreateClient,
         handleEditClient,
         handleDeleteClient,
+        handleSelectedClient,
+        handleRemoveClient,
+        handleClearClients,
       }}
     >
       {children}
