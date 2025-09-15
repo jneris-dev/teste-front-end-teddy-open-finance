@@ -2,6 +2,14 @@
 
 Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes para uma plataforma de Open Finance, permitindo o cadastro, visualização, edição e exclusão de dados de clientes de forma segura e eficiente.
 
+### 🚀 Visite a Aplicação
+---
+
+Acesse a versão em produção da aplicação clicando no link abaixo:
+
+[**🔗 Visitar Aplicação em Produção**](https://teste-front-end-teddy-open-finance.vercel.app)
+
+
 ### ⚙️ Funcionalidades
 ---
 
