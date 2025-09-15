@@ -53,7 +53,7 @@ function Modal() {
 
   return (
     <div className="modal fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
-      <div className="w-full max-w-md bg-white pt-4 p-6 rounded-lg shadow-lg space-y-4 relative">
+      <div className="w-full max-w-md bg-white dark:bg-neutral-900 pt-4 p-6 rounded-lg shadow-lg space-y-4 relative">
         <div className="flex items-end justify-between">
           <strong className="text-xl">
             {module === "createClient"
@@ -123,7 +123,9 @@ function Modal() {
             </form>
           ) : module === "deleteClient" ? (
             <div className="w-full h-auto flex flex-col gap-4">
-              <p className="text-neutral-600">{description}</p>
+              <p className="text-neutral-600 dark:text-neutral-300">
+                {description}
+              </p>
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
@@ -134,7 +136,9 @@ function Modal() {
             </div>
           ) : module === "saveClient" || module === "default" ? (
             <div className="w-full h-auto flex flex-col gap-4">
-              <p className="text-neutral-600">{description}</p>
+              <p className="text-neutral-600 dark:text-neutral-300">
+                {description}
+              </p>
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
