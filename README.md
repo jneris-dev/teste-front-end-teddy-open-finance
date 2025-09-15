@@ -1,6 +1,6 @@
 # 💻 Projeto Front-End Teddy Open Finance
 
-Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes para uma plataforma de Open Finance, permitindo o cadastro, visualização, edição e exclusão de dados de clientes de forma segura e eficiente.
+Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes, permitindo o cadastro, visualização, edição, seleção e exclusão de dados de clientes de forma segura e eficiente.
 
 ### 🚀 Visite a Aplicação
 
@@ -20,7 +20,6 @@ Acesse a versão em produção da aplicação clicando no link abaixo:
   - **R**ecuperar: Listagem completa e detalhada de todos os clientes.
   - **U**pdate: Funcionalidade para editar informações de clientes existentes.
   - **D**elete: Opção para remover um cliente do sistema.
-- **Pesquisa e Filtros:** Ferramentas para buscar clientes por nome e outros critérios.
 - **Responsividade:** Layout adaptável para diferentes tamanhos de tela (desktop e mobile).
 - **Gerenciamento de Estado:** Utiliza `localStorage` para persistência de dados de autenticação e clientes.
 
@@ -49,7 +48,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 **Pré-requisitos:**
 
-- [Node.js](https://nodejs.org/) (v22.15.0)
+- [Node.js](https://nodejs.org/) (v22.15.0 LTS)
 - [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com/products/docker-desktop/) (para rodar em contêiner)
 
