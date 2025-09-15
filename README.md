@@ -1,69 +1,140 @@
-# React + TypeScript + Vite
+# 💻 Projeto Front-End Teddy Open Finance
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes para uma plataforma de Open Finance, permitindo o cadastro, visualização, edição e exclusão de dados de clientes de forma segura e eficiente.
 
-Currently, two official plugins are available:
+### ⚙️ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Autenticação:** Sistema de login simulado para acesso ao painel de controle.
+- **CRUD de Clientes:**
+  - **C**riar: Formulário para cadastro de novos clientes.
+  - **R**ecuperar: Listagem completa e detalhada de todos os clientes.
+  - **U**pdate: Funcionalidade para editar informações de clientes existentes.
+  - **D**elete: Opção para remover um cliente do sistema.
+- **Pesquisa e Filtros:** Ferramentas para buscar clientes por nome e outros critérios.
+- **Responsividade:** Layout adaptável para diferentes tamanhos de tela (desktop e mobile).
+- **Gerenciamento de Estado:** Utiliza `localStorage` para persistência de dados de autenticação e clientes.
 
-## Expanding the ESLint configuration
+### 🧪 Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React:** Biblioteca JavaScript para construção de interfaces de usuário.
+- **TypeScript:** Adiciona tipagem estática ao JavaScript, melhorando a escalabilidade e a manutenção.
+- **Vite:** Ferramenta de build moderna e rápida para projetos front-end.
+- **Axios:** Cliente HTTP para comunicação com a API.
+- **Vitest:** Framework de testes unitários e de integração.
+- **TailwindCSS:** Framework CSS para estilização da aplicação.
+- **Crypto-JS:** Biblioteca para criptografia e segurança de dados.
+- **react-router-dom:** Gerenciamento de rotas.
+- **Docker:** Para containerização e execução da aplicação em um ambiente isolado.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+\<br\>
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🔧 Instalação e Execução
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+**Pré-requisitos:**
+
+- [Node.js](https://nodejs.org/) (v22.15.0)
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/products/docker-desktop/) (para rodar em contêiner)
+
+#### 1\. Via linha de comando (sem Docker)
+
+```bash
+# Clone o repositório
+git clone https://github.com/jneris-dev/teste-front-end-teddy-open-finance.git
+
+# Acesse o diretório do projeto
+cd teste-front-end-teddy-open-finance
+
+# Instale as dependências
+npm install
+
+# Inicie a aplicação em modo de desenvolvimento
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+A aplicação estará acessível em `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### 2\. Com Docker
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Se você tem o Docker instalado, pode construir e rodar a aplicação em um contêiner.
+
+```bash
+# Construa a imagem Docker
+docker build -t meu-app-react:1.0 .
+
+# Execute o contêiner, mapeando a porta 8080 da sua máquina para a porta 80 do contêiner
+docker run -p 8080:80 meu-app-react:1.0
 ```
+
+A aplicação estará acessível em `http://localhost:8080`.
+
+### ✔️ Testes
+
+Para executar os testes unitários e de integração do projeto, use o seguinte comando:
+
+```bash
+# Executa todos os testes
+npm run test
+```
+
+Ou, para rodar os testes em modo "watch" durante o desenvolvimento:
+
+```bash
+# Executa os testes em modo de observação
+npm run test:watch
+```
+
+### 🔑 Variáveis de Ambiente
+
+Para a aplicação funcionar, você precisa criar um arquivo `.env.local` na raiz do projeto com as seguintes variáveis de ambiente.
+
+- Crie o arquivo `.env.local`.
+- Copie o conteúdo do arquivo `.env.example` para o novo arquivo.
+- Preencha as variáveis com os valores corretos.
+
+### 📁 Estrutura do Projeto
+
+A estrutura de diretórios do projeto segue a convenção padrão para aplicações React:
+
+```
+.
+├── public/                 # Arquivos públicos e estáticos
+├── src/                    # Código fonte da aplicação
+│   ├── assets/             # Imagens e outros ativos
+│   ├── components/         # Componentes React reutilizáveis
+│   ├── context/            # Contextos da aplicação
+│   ├── guards/             # Funções para gerenciamento das rotas
+│   ├── interfaces/         # Interfaces e tipagens (TypeScript)
+│   ├── pages/              # Componentes de página
+│   ├── router/             # Gerenciamento das rotas
+│   ├── services/           # Serviços de comunicação com a API
+│   ├── styles/             # Arquivos CSS e de estilização
+│   ├── tests/              # Arquivos de testes
+│   ├── util/               # Funções utilitárias
+│   ├── App.tsx             # Componente raiz da aplicação
+│   └── main.tsx            # Ponto de entrada da aplicação
+├── .dockerignore           # Arquivos a serem ignorados pelo Docker
+├── Dockerfile              # Instruções de build do Docker
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+### 📦 Construção do Projeto
+
+Para gerar uma versão de produção da aplicação (otimizada para velocidade e tamanho), use o seguinte comando:
+
+```bash
+# Executa o build de produção
+npm run build
+```
+
+Este comando irá criar uma pasta chamada dist/ na raiz do seu projeto. O conteúdo dessa pasta (index.html, arquivos CSS, JavaScript e outros assets) é a versão final e otimizada da sua aplicação, pronta para ser servida por um servidor web (como Nginx, Apache ou para ser implantada em serviços como Vercel, Netlify, etc.).
+
+### ✍️ Autor
+
+[João Neris](https://github.com/jneris-dev)
