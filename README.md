@@ -90,11 +90,10 @@ npm run test:watch
 
 ### 🔑 Variáveis de Ambiente
 
-Para a aplicação funcionar, você precisa criar um arquivo `.env.local` na raiz do projeto com as seguintes variáveis de ambiente.
+A aplicação utiliza variáveis de ambiente para a conexão com a API e para a criptografia.
 
-- Crie o arquivo `.env.local`.
-- Copie o conteúdo do arquivo `.env.example` para o novo arquivo.
-- Preencha as variáveis com os valores corretos.
+- Na raiz do projeto, crie uma cópia do arquivo `.env.example` e renomeie-a para `.env.local`.
+- As variáveis já estão preenchidas com os valores necessários para a avaliação do projeto. Não é necessário fazer nenhuma alteração, a menos que você queira apontar para outro endpoint.
 
 ### 📁 Estrutura do Projeto
 
