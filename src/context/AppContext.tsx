@@ -16,6 +16,7 @@ import type { Client, UsersResponse } from "../interfaces/client_interface";
 
 import api from "../services/api";
 import { formatDateTime } from "../util/formats";
+import { encrypt, decrypt } from "../util/crypto";
 
 interface AppContextProps {
   children: ReactElement;
@@ -73,7 +74,7 @@ export function AppContextProvider({ children }: AppContextProps) {
         const storedAuth = localStorage.getItem("authData");
         if (storedAuth) {
           try {
-            const authData: Auth = JSON.parse(storedAuth);
+            const authData: Auth = decrypt(storedAuth);
             setAuth(authData);
           } catch (error) {
             console.error("Failed to parse auth data from localStorage", error);
@@ -98,7 +99,7 @@ export function AppContextProvider({ children }: AppContextProps) {
     let currentAuth: Auth | null = null;
     if (storedAuth) {
       try {
-        currentAuth = JSON.parse(storedAuth);
+        currentAuth = decrypt(storedAuth);
       } catch (e) {
         console.error("Erro ao ler dados do localStorage", e);
       }
@@ -121,7 +122,7 @@ export function AppContextProvider({ children }: AppContextProps) {
       };
     }
 
-    localStorage.setItem("authData", JSON.stringify(updatedAuth));
+    localStorage.setItem("authData", encrypt(updatedAuth));
     setAuth(updatedAuth);
 
     setTimeout(() => setLoadingScreen(false), 500);
@@ -133,12 +134,12 @@ export function AppContextProvider({ children }: AppContextProps) {
     const storedAuth = localStorage.getItem("authData");
     if (storedAuth) {
       try {
-        const currentAuth: Auth = JSON.parse(storedAuth);
+        const currentAuth: Auth = decrypt(storedAuth);
         const updatedAuth: Auth = {
           ...currentAuth,
           loggedIn: false,
         };
-        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        localStorage.setItem("authData", encrypt(updatedAuth));
         setAuth(updatedAuth);
       } catch (e) {
         console.error("Erro ao ler dados do localStorage para logout", e);
@@ -247,6 +248,7 @@ export function AppContextProvider({ children }: AppContextProps) {
       .delete(`/users/${id}`)
       .then((response) => {
         if (response.status === 200) {
+          handleRemoveClient(String(id));
           setShowModal({
             show: true,
             modal: {
@@ -256,7 +258,6 @@ export function AppContextProvider({ children }: AppContextProps) {
               reload: true,
             },
           });
-          handleRemoveClient(String(id));
         }
       })
       .catch((err) => {
@@ -279,7 +280,7 @@ export function AppContextProvider({ children }: AppContextProps) {
 
     if (storedAuth) {
       try {
-        const currentAuth: Auth = JSON.parse(storedAuth);
+        const currentAuth: Auth = decrypt(storedAuth);
         const clientsCopy = [...currentAuth.clients];
         const clientIndex = clientsCopy.findIndex(
           (c: Client) => c.id === client.id
@@ -299,7 +300,7 @@ export function AppContextProvider({ children }: AppContextProps) {
           clients: updatedClients,
         };
 
-        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        localStorage.setItem("authData", encrypt(updatedAuth));
         setAuth(updatedAuth);
 
         setShowModal({
@@ -324,7 +325,7 @@ export function AppContextProvider({ children }: AppContextProps) {
 
     if (storedAuth) {
       try {
-        const currentAuth: Auth = JSON.parse(storedAuth);
+        const currentAuth: Auth = decrypt(storedAuth);
 
         const updatedClients = currentAuth.clients.filter(
           (c: Client) => c.id !== Number(clientId)
@@ -335,7 +336,7 @@ export function AppContextProvider({ children }: AppContextProps) {
           clients: updatedClients,
         };
 
-        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        localStorage.setItem("authData", encrypt(updatedAuth));
         setAuth(updatedAuth);
 
         setShowModal({
@@ -360,14 +361,14 @@ export function AppContextProvider({ children }: AppContextProps) {
 
     if (storedAuth) {
       try {
-        const currentAuth: Auth = JSON.parse(storedAuth);
+        const currentAuth: Auth = decrypt(storedAuth);
 
         const updatedAuth: Auth = {
           ...currentAuth,
           clients: [],
         };
 
-        localStorage.setItem("authData", JSON.stringify(updatedAuth));
+        localStorage.setItem("authData", encrypt(updatedAuth));
         setAuth(updatedAuth);
 
         setShowModal({
