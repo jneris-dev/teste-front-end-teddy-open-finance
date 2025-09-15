@@ -21,7 +21,7 @@ function ClientCard({ modules, client }: ClientProps) {
     useAppContext();
 
   return (
-    <div className="bg-white p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
+    <div className="bg-white dark:bg-neutral-800 p-4 rounded shadow-md flex flex-col items-center gap-3 w-full">
       <strong
         className="text-xl truncate w-full text-center"
         title={client.name}
@@ -41,7 +41,7 @@ function ClientCard({ modules, client }: ClientProps) {
         {mods.includes("add") && (
           <button
             type="button"
-            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 dark:focus:border-neutral-700 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700"
             onClick={() => {
               handleSelectedClient(client);
               setShowModal({
@@ -63,7 +63,7 @@ function ClientCard({ modules, client }: ClientProps) {
         {mods.includes("edit") && (
           <button
             type="button"
-            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 dark:focus:border-neutral-700 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700"
             onClick={() =>
               setShowModal({
                 show: true,
@@ -80,7 +80,7 @@ function ClientCard({ modules, client }: ClientProps) {
         {mods.includes("delete") && (
           <button
             type="button"
-            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 dark:focus:border-neutral-700 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700"
             onClick={() =>
               setShowModal({
                 show: true,
@@ -99,7 +99,7 @@ function ClientCard({ modules, client }: ClientProps) {
         {mods.includes("remove") && (
           <button
             type="button"
-            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer hover:bg-stone-100"
+            className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 cursor-pointer hover:bg-neutral-100"
             onClick={() => {
               handleRemoveClient(String(client.id));
               setShowModal({

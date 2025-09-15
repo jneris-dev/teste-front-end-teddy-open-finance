@@ -28,10 +28,10 @@ function MobileMenu({ show, onClose }: MobileMenuProps) {
           <img
             src="/assets/logo.png"
             alt="Logo"
-            className="max-w-full w-auto h-auto"
+            className="max-w-full w-auto h-auto dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1)_contrast(1)]"
           />
         </div>
-        <div className="py-10 flex flex-col w-full h-full flex-1 bg-white">
+        <div className="py-10 flex flex-col w-full h-full flex-1 bg-white dark:bg-neutral-950">
           <ul className="flex flex-col gap-4">
             <li
               className={`group ${location.pathname === "/" ? "active" : ""}`}
@@ -43,7 +43,7 @@ function MobileMenu({ show, onClose }: MobileMenuProps) {
               >
                 <UserIcon
                   size={24}
-                  className="text-stone-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
+                  className="text-neutral-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
                 />
                 <span>Clientes</span>
               </Link>
@@ -60,7 +60,7 @@ function MobileMenu({ show, onClose }: MobileMenuProps) {
               >
                 <UserCheckIcon
                   size={24}
-                  className="text-stone-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
+                  className="text-neutral-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
                 />
                 <span>Clientes selecionados</span>
               </Link>
@@ -72,7 +72,7 @@ function MobileMenu({ show, onClose }: MobileMenuProps) {
               >
                 <SignOutIcon
                   size={24}
-                  className="text-stone-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
+                  className="text-neutral-500 group-hover:text-teddy-500 group-[.active]:text-teddy-500"
                 />
                 <span>Sair</span>
               </button>
@@ -82,7 +82,7 @@ function MobileMenu({ show, onClose }: MobileMenuProps) {
         <div className="absolute -right-5 top-32 -translate-y-1/2">
           <button
             type="button"
-            className="w-11 h-11 rounded-full bg-stone-950 flex items-center justify-center text-white hover:bg-teddy-500 cursor-pointer transition-colors"
+            className="w-11 h-11 rounded-full bg-neutral-950 dark:bg-neutral-50 flex items-center justify-center text-white dark:text-neutral-950 hover:bg-teddy-500 cursor-pointer transition-colors"
             onClick={onClose}
           >
             <ArrowCircleLeftIcon size={22} weight="fill" />

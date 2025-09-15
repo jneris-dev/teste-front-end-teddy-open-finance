@@ -87,7 +87,7 @@ const Input = ({
   };
 
   const classes = classNames(
-    "px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors",
+    "px-3 border-2 border-neutral-200 dark:border-neutral-800 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-neutral-400 transition-colors",
     {
       "h-10": height === "small",
       "h-12": height === "medium",

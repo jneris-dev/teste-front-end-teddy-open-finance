@@ -4,29 +4,33 @@ import { Link, useLocation } from "react-router-dom";
 
 import MobileMenu from "./MobileMenu";
 import { useAppContext } from "../context/AppContext";
+import { MoonIcon, SunDimIcon } from "@phosphor-icons/react";
 
 function Header() {
   let location = useLocation();
 
-  const { auth, handleLogout } = useAppContext();
+  const { auth, handleLogout, theme, handleToggleTheme } = useAppContext();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <>
-      <header className="w-full h-auto p-4 bg-white shadow z-10 relative">
+      <header className="w-full h-auto p-4 bg-white dark:bg-neutral-950 shadow z-10 relative">
         <nav className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               type="button"
-              className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer md:hidden"
+              className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 cursor-pointer md:hidden"
               onClick={() => setShowMobileMenu(true)}
             >
-              <ListIcon size={24} className="text-stone-600" />
+              <ListIcon
+                size={24}
+                className="text-neutral-600 dark:text-neutral-300"
+              />
             </button>
             <img
               src="/assets/logo.png"
               alt="Logo"
-              className="max-w-full w-auto h-auto"
+              className="max-w-full w-auto h-auto dark:[filter:invert(1)_hue-rotate(180deg)_brightness(1)_contrast(1)]"
             />
           </div>
           <div className="md:flex hidden">
@@ -67,8 +71,21 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div>
-            Olá, <strong>{auth?.userName}</strong>!
+          <div className="flex gap-2 items-center">
+            <span>
+              Olá, <strong>{auth?.userName}</strong>!
+            </span>
+            <button
+              type="button"
+              className="p-2 rounded outline-0 border border-transparent cursor-pointer"
+              onClick={handleToggleTheme}
+            >
+              {theme ? (
+                <SunDimIcon size={24} className="text-neutral-400" />
+              ) : (
+                <MoonIcon size={24} className="text-neutral-700" />
+              )}
+            </button>
           </div>
         </nav>
       </header>

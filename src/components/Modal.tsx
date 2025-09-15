@@ -66,7 +66,7 @@ function Modal() {
           </strong>
           <button
             type="button"
-            className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer"
+            className="p-2 rounded outline-0 border border-transparent focus:border-neutral-300 cursor-pointer"
             onClick={closeModal}
           >
             <XIcon size={20} weight="bold" />
@@ -123,7 +123,7 @@ function Modal() {
             </form>
           ) : module === "deleteClient" ? (
             <div className="w-full h-auto flex flex-col gap-4">
-              <p className="text-stone-600">{description}</p>
+              <p className="text-neutral-600">{description}</p>
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
@@ -134,7 +134,7 @@ function Modal() {
             </div>
           ) : module === "saveClient" || module === "default" ? (
             <div className="w-full h-auto flex flex-col gap-4">
-              <p className="text-stone-600">{description}</p>
+              <p className="text-neutral-600">{description}</p>
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"

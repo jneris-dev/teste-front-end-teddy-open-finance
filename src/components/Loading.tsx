@@ -8,7 +8,7 @@ interface LoadingProps {
 function Loading({ type }: LoadingProps) {
   const classes = classNames("w-full flex items-center justify-center", {
     "w-full h-full flex-1": type === "internal",
-    "absolute inset-0 bg-white z-50 h-dvh": type === "auth",
+    "absolute inset-0 bg-white dark:bg-neutral-950 z-50 h-dvh": type === "auth",
   });
 
   return (

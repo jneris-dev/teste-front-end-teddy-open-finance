@@ -42,7 +42,7 @@ function Home() {
                   <select
                     name="perPage"
                     id="perPage"
-                    className="border border-stone-300 rounded p-1 outline-0 focus:border-teddy-500 cursor-pointer text-sm"
+                    className="border border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 rounded p-1 outline-0 focus:border-teddy-500 cursor-pointer text-sm"
                     value={filters.limit}
                     onChange={(e) =>
                       setFilters({
