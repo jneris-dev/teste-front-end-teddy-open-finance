@@ -100,7 +100,11 @@ export function AppContextProvider({ children }: AppContextProps) {
 
   async function handleEditClient(id: number, data: Client) {
     await api
-      .patch(`/users/${id}`, data)
+      .patch(`/users/${id}`, {
+        name: data.name,
+        salary: data.salary,
+        companyValuation: data.companyValuation,
+      })
       .then((response) => {
         console.log(response);
         window.location.reload();

@@ -3,6 +3,7 @@ import { XIcon } from "@phosphor-icons/react";
 
 import { useAppContext } from "../context/AppContext";
 import type { Client } from "../interfaces/client_interface";
+import Input from "./Input";
 
 function Modal() {
   const {
@@ -70,44 +71,38 @@ function Modal() {
               className="w-full h-auto flex flex-col gap-3"
               onSubmit={submitForm}
             >
-              <input
+              <Input
                 type="text"
-                name="name"
                 id="name"
+                name="name"
                 placeholder="Digite o nome:"
-                className="px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors"
-                value={formClient.name || ""}
-                onChange={(e) =>
-                  setFormClient({ ...formClient, name: e.target.value })
-                }
+                value={formClient.name}
+                onChange={setFormClient}
+                validator={"O nome é obrigatório."}
+                height="medium"
+                required
               />
-              <input
-                type="text"
-                name="salary"
+              <Input
+                type="currency"
                 id="salary"
+                name="salary"
                 placeholder="Digite o salário:"
-                className="px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors"
-                value={String(formClient.salary) || ""}
-                onChange={(e) =>
-                  setFormClient({
-                    ...formClient,
-                    salary: Number(e.target.value),
-                  })
-                }
+                value={formClient.salary}
+                onChange={setFormClient}
+                validator={"O valor do salário é obrigatório."}
+                height="medium"
+                required
               />
-              <input
-                type="text"
-                name="companyValuation"
+              <Input
+                type="currency"
                 id="companyValuation"
+                name="companyValuation"
                 placeholder="Digite o valor da empresa:"
-                className="px-3 border-2 border-stone-200 rounded w-full h-10 outline-0 focus:border-teddy-500 placeholder:text-stone-400 transition-colors"
-                value={String(formClient.companyValuation) || ""}
-                onChange={(e) =>
-                  setFormClient({
-                    ...formClient,
-                    companyValuation: Number(e.target.value),
-                  })
-                }
+                value={formClient.companyValuation}
+                onChange={setFormClient}
+                validator={"O valor da empresa é obrigatório."}
+                height="medium"
+                required
               />
               <input
                 type="submit"
