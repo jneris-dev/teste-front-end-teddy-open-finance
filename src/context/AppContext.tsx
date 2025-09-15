@@ -35,7 +35,7 @@ export function AppContextProvider({ children }: AppContextProps) {
       title: null,
     },
   });
-  const [loadingScreen, setLoadingScreen] = useState(false);
+  const [loadingScreen, setLoadingScreen] = useState(true);
 
   function handleToggleTheme() {
     setTheme(!theme);
@@ -66,16 +66,29 @@ export function AppContextProvider({ children }: AppContextProps) {
   }, [showModal]);
 
   useEffect(() => {
-    const storedAuth = localStorage.getItem("authData");
-    if (storedAuth) {
-      try {
-        const authData: Auth = JSON.parse(storedAuth);
-        setAuth(authData);
-      } catch (error) {
-        console.error("Failed to parse auth data from localStorage", error);
-        localStorage.removeItem("authData");
-      }
-    }
+    const loadAuthAndSetDelay = async () => {
+      const delayPromise = new Promise((resolve) => setTimeout(resolve, 500));
+
+      const authPromise = new Promise((resolve) => {
+        const storedAuth = localStorage.getItem("authData");
+        if (storedAuth) {
+          try {
+            const authData: Auth = JSON.parse(storedAuth);
+            setAuth(authData);
+          } catch (error) {
+            console.error("Failed to parse auth data from localStorage", error);
+            localStorage.removeItem("authData");
+          }
+        }
+        resolve(null);
+      });
+
+      await Promise.all([authPromise, delayPromise]);
+
+      setLoadingScreen(false);
+    };
+
+    loadAuthAndSetDelay().catch(console.error);
   }, []);
 
   const handleLogin = (userName: string) => {
