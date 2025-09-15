@@ -3,6 +3,7 @@
 Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes para uma plataforma de Open Finance, permitindo o cadastro, visualização, edição e exclusão de dados de clientes de forma segura e eficiente.
 
 ### ⚙️ Funcionalidades
+---
 
 - **Autenticação:** Sistema de login simulado para acesso ao painel de controle.
 - **CRUD de Clientes:**
@@ -15,6 +16,7 @@ Este projeto é uma aplicação web desenvolvida como um teste técnico para fro
 - **Gerenciamento de Estado:** Utiliza `localStorage` para persistência de dados de autenticação e clientes.
 
 ### 🧪 Tecnologias Utilizadas
+---
 
 O projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
 
@@ -28,9 +30,8 @@ O projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
 - **react-router-dom:** Gerenciamento de rotas.
 - **Docker:** Para containerização e execução da aplicação em um ambiente isolado.
 
-\<br\>
-
 ### 🔧 Instalação e Execução
+---
 
 Para rodar o projeto localmente, siga os passos abaixo:
 
@@ -73,6 +74,7 @@ docker run -p 8080:80 meu-app-react:1.0
 A aplicação estará acessível em `http://localhost:8080`.
 
 ### ✔️ Testes
+---
 
 Para executar os testes unitários e de integração do projeto, use o seguinte comando:
 
@@ -89,6 +91,7 @@ npm run test:watch
 ```
 
 ### 🔑 Variáveis de Ambiente
+---
 
 Para a aplicação funcionar, você precisa criar um arquivo `.env.local` na raiz do projeto com as seguintes variáveis de ambiente.
 
@@ -97,6 +100,7 @@ Para a aplicação funcionar, você precisa criar um arquivo `.env.local` na rai
 - Preencha as variáveis com os valores corretos.
 
 ### 📁 Estrutura do Projeto
+---
 
 A estrutura de diretórios do projeto segue a convenção padrão para aplicações React:
 
@@ -125,6 +129,7 @@ A estrutura de diretórios do projeto segue a convenção padrão para aplicaç�
 ```
 
 ### 📦 Construção do Projeto
+---
 
 Para gerar uma versão de produção da aplicação (otimizada para velocidade e tamanho), use o seguinte comando:
 
@@ -134,7 +139,3 @@ npm run build
 ```
 
 Este comando irá criar uma pasta chamada dist/ na raiz do seu projeto. O conteúdo dessa pasta (index.html, arquivos CSS, JavaScript e outros assets) é a versão final e otimizada da sua aplicação, pronta para ser servida por um servidor web (como Nginx, Apache ou para ser implantada em serviços como Vercel, Netlify, etc.).
-
-### ✍️ Autor
-
-[João Neris](https://github.com/jneris-dev)
