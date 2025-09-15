@@ -105,7 +105,7 @@ function ClientCard({ modules, client }: ClientProps) {
               setShowModal({
                 show: true,
                 modal: {
-                  module: "saveClient",
+                  module: "default",
                   description:
                     "Cliente " +
                     client.name +

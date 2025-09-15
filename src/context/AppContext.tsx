@@ -92,6 +92,8 @@ export function AppContextProvider({ children }: AppContextProps) {
   }, []);
 
   const handleLogin = (userName: string) => {
+    setLoadingScreen(true);
+
     const storedAuth = localStorage.getItem("authData");
     let currentAuth: Auth | null = null;
     if (storedAuth) {
@@ -110,7 +112,6 @@ export function AppContextProvider({ children }: AppContextProps) {
         startSession: formatDateTime(new Date()),
         loggedIn: true,
       };
-      console.log(`User '${userName}' re-authenticated.`);
     } else {
       updatedAuth = {
         userName,
@@ -118,14 +119,17 @@ export function AppContextProvider({ children }: AppContextProps) {
         clients: [],
         loggedIn: true,
       };
-      console.log(`New user '${userName}' logged in.`);
     }
 
     localStorage.setItem("authData", JSON.stringify(updatedAuth));
     setAuth(updatedAuth);
+
+    setTimeout(() => setLoadingScreen(false), 500);
   };
 
   const handleLogout = () => {
+    setLoadingScreen(true);
+
     const storedAuth = localStorage.getItem("authData");
     if (storedAuth) {
       try {
@@ -136,13 +140,14 @@ export function AppContextProvider({ children }: AppContextProps) {
         };
         localStorage.setItem("authData", JSON.stringify(updatedAuth));
         setAuth(updatedAuth);
-        console.log("User logged out but data persisted.");
       } catch (e) {
         console.error("Erro ao ler dados do localStorage para logout", e);
         localStorage.removeItem("authData");
         setAuth(null);
       }
     }
+
+    setTimeout(() => setLoadingScreen(false), 500);
   };
 
   const [filters, setFilters] = useState({
@@ -176,10 +181,29 @@ export function AppContextProvider({ children }: AppContextProps) {
     await api
       .post(`/users`, data)
       .then((response) => {
-        console.log(response);
-        window.location.reload();
+        if (response.status === 201) {
+          setShowModal({
+            show: true,
+            modal: {
+              module: "default",
+              description: "Cliente cadastrado com sucesso!",
+              title: "Cliente cadastrado",
+              reload: true,
+            },
+          });
+        }
       })
       .catch((err) => {
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Erro ao criar um cliente!",
+            title: "Ops, ocorreu um erro",
+            reload: true,
+          },
+        });
+
         console.log(err);
       });
   }
@@ -192,10 +216,28 @@ export function AppContextProvider({ children }: AppContextProps) {
         companyValuation: data.companyValuation,
       })
       .then((response) => {
-        console.log(response);
-        window.location.reload();
+        if (response.status === 200)
+          setShowModal({
+            show: true,
+            modal: {
+              module: "default",
+              description: "Cliente editado com sucesso!",
+              title: "Cliente editado",
+              reload: true,
+            },
+          });
       })
       .catch((err) => {
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Erro ao editar o cliente!",
+            title: "Ops, ocorreu um erro",
+            reload: true,
+          },
+        });
+
         console.log(err);
       });
   }
@@ -204,10 +246,30 @@ export function AppContextProvider({ children }: AppContextProps) {
     await api
       .delete(`/users/${id}`)
       .then((response) => {
-        console.log(response);
-        window.location.reload();
+        if (response.status === 200) {
+          setShowModal({
+            show: true,
+            modal: {
+              module: "default",
+              description: "Cliente deletado com sucesso!",
+              title: "Cliente deletado",
+              reload: true,
+            },
+          });
+          handleRemoveClient(String(id));
+        }
       })
       .catch((err) => {
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Erro ao deletar o cliente!",
+            title: "Ops, ocorreu um erro",
+            reload: true,
+          },
+        });
+
         console.log(err);
       });
   }
@@ -239,6 +301,15 @@ export function AppContextProvider({ children }: AppContextProps) {
 
         localStorage.setItem("authData", JSON.stringify(updatedAuth));
         setAuth(updatedAuth);
+
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Cliente selecionado com sucesso!",
+            title: "Cliente selecionado",
+          },
+        });
       } catch (e) {
         console.error(
           "Erro ao ler/escrever dados do localStorage para o cliente",
@@ -266,6 +337,15 @@ export function AppContextProvider({ children }: AppContextProps) {
 
         localStorage.setItem("authData", JSON.stringify(updatedAuth));
         setAuth(updatedAuth);
+
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Cliente removido com sucesso!",
+            title: "Cliente removido",
+          },
+        });
       } catch (e) {
         console.error(
           "Erro ao ler/escrever dados do localStorage para remover o cliente",
@@ -289,6 +369,15 @@ export function AppContextProvider({ children }: AppContextProps) {
 
         localStorage.setItem("authData", JSON.stringify(updatedAuth));
         setAuth(updatedAuth);
+
+        setShowModal({
+          show: true,
+          modal: {
+            module: "default",
+            description: "Lista de clientes selecionados limpo com sucesso!",
+            title: "Clientes selecionados",
+          },
+        });
       } catch (e) {
         console.error(
           "Erro ao ler/escrever dados do localStorage para limpar os clientes",

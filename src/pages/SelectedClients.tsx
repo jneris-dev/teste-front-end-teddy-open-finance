@@ -32,7 +32,9 @@ function SelectedClients() {
                   })}
                 </div>
               ) : (
-                <p>Você não possui clientes selecionados.</p>
+                <p className="xs:text-start text-center">
+                  Você não possui clientes selecionados.
+                </p>
               )}
             </div>
             <div className="w-full h-auto flex items-center justify-center">

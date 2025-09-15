@@ -5,6 +5,7 @@ export type ModuleTypes =
   | "editClient"
   | "deleteClient"
   | "saveClient"
+  | "default"
   | "";
 
 export interface ModalProps {
@@ -12,6 +13,7 @@ export interface ModalProps {
   module: ModuleTypes;
   description?: string | null;
   data?: Client | null;
+  reload?: boolean;
 }
 
 export interface ShowModalState {

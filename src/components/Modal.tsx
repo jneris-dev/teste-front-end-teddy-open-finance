@@ -16,13 +16,20 @@ function Modal() {
 
   if (!showModal.modal || !showModal.show) return null;
 
-  const { title, module, description, data } = showModal.modal;
+  const { title, module, description, data, reload } = showModal.modal;
 
   const [formClient, setFormClient] = useState<Client>({
     name: "",
     salary: "",
     companyValuation: "",
   });
+
+  function closeModal() {
+    setShowModal({ show: false, modal: null });
+    if (reload) {
+      window.location.reload();
+    }
+  }
 
   function submitForm(event: FormEvent) {
     event.preventDefault();
@@ -32,12 +39,12 @@ function Modal() {
     if (module === "editClient" && data)
       handleEditClient(Number(data.id), formClient);
 
-    setShowModal({ show: false, modal: null });
+    closeModal();
   }
 
   function deleteClient(id: number) {
     handleDeleteClient(id);
-    setShowModal({ show: false, modal: null });
+    closeModal();
   }
 
   useEffect(() => {
@@ -60,7 +67,7 @@ function Modal() {
           <button
             type="button"
             className="p-2 rounded outline-0 border border-transparent focus:border-stone-300 cursor-pointer"
-            onClick={() => setShowModal({ show: false, modal: null })}
+            onClick={closeModal}
           >
             <XIcon size={20} weight="bold" />
           </button>
@@ -125,13 +132,13 @@ function Modal() {
                 Excluir cliente
               </button>
             </div>
-          ) : module === "saveClient" ? (
+          ) : module === "saveClient" || module === "default" ? (
             <div className="w-full h-auto flex flex-col gap-4">
               <p className="text-stone-600">{description}</p>
               <button
                 type="button"
                 className="bg-teddy-500 text-white font-bold w-full h-10 rounded cursor-pointer hover:bg-teddy-600 transition-colors outline-0 focus:bg-teddy-600"
-                onClick={() => setShowModal({ show: false, modal: null })}
+                onClick={closeModal}
               >
                 Entendi
               </button>

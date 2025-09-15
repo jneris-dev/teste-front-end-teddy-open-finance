@@ -11,7 +11,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { auth, loadingScreen } = useAppContext();
 
   if (loadingScreen) {
-    return <Loading />;
+    return <Loading type="auth" />;
   }
 
   if (auth && auth.loggedIn) {
