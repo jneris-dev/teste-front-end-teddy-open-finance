@@ -3,10 +3,12 @@ import { ListIcon } from "@phosphor-icons/react/dist/ssr";
 import { Link, useLocation } from "react-router-dom";
 
 import MobileMenu from "./MobileMenu";
+import { useAppContext } from "../context/AppContext";
 
 function Header() {
   let location = useLocation();
 
+  const { auth, handleLogout } = useAppContext();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
@@ -58,6 +60,7 @@ function Header() {
                 <button
                   type="button"
                   className="border-b border-transparent hover:border-teddy-500 hover:text-teddy-500 group-[.active]:border-teddy-500 group-[.active]:text-teddy-500 cursor-pointer"
+                  onClick={handleLogout}
                 >
                   Sair
                 </button>
@@ -65,7 +68,7 @@ function Header() {
             </ul>
           </div>
           <div>
-            Olá, <strong>Usuário</strong>!
+            Olá, <strong>{auth?.userName}</strong>!
           </div>
         </nav>
       </header>

@@ -9,6 +9,10 @@ export interface AppContextData {
   showModal: ShowModalState;
   setShowModal: (state: ShowModalState) => void;
 
+  auth: Auth | null;
+  handleLogin: (userName: string) => void;
+  handleLogout: () => void;
+
   filters: Filters;
   setFilters: (filters: Filters) => void;
 
@@ -24,4 +28,11 @@ export interface AppContextData {
 export interface Filters {
   page: number;
   limit: number;
+}
+
+export interface Auth {
+  userName: string;
+  startSession: string;
+  clients: Client[];
+  loggedIn: boolean;
 }
