@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { ListIcon } from "@phosphor-icons/react/dist/ssr";
 import { Link, useLocation } from "react-router-dom";
+import { MoonIcon, SunDimIcon, ListIcon } from "@phosphor-icons/react";
 
 import MobileMenu from "./MobileMenu";
 import { useAppContext } from "../context/AppContext";
-import { MoonIcon, SunDimIcon } from "@phosphor-icons/react";
+import { useAuthContext } from "../context/AuthContext";
 
 function Header() {
   let location = useLocation();
 
-  const { auth, handleLogout, theme, handleToggleTheme } = useAppContext();
+  const { theme, handleToggleTheme } = useAppContext();
+  const { auth, handleLogout } = useAuthContext();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (

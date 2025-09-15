@@ -1,20 +1,21 @@
 import { useState } from "react";
 
 import Input from "../components/Input";
-import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
 
 function Welcome() {
   const [authUser, setAuthUser] = useState({
     name: "",
   });
-  const { handleLogin, auth } = useAppContext();
+  const { handleLogin, auth } = useAuthContext();
 
-  const handleAuth = (e: React.FormEvent) => {
+  function handleAuth(e: React.FormEvent) {
     e.preventDefault();
+
     if (authUser.name) {
       handleLogin(authUser.name);
     }
-  };
+  }
 
   return (
     <section className="welcome relative w-full h-dvh p-4">

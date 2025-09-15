@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import { useAppContext } from "../context/AppContext";
 import { ProtectedRoute } from "../guards/ProtectedRoute";
 import { PublicRoute } from "../guards/PublicRoute";
+import { useAuthContext } from "../context/AuthContext";
 
 import Home from "../pages/Home";
 import Welcome from "../pages/Welcome";
@@ -11,7 +11,7 @@ import SelectedClients from "../pages/SelectedClients";
 
 export function Router() {
   const { pathname } = useLocation();
-  const { auth } = useAppContext();
+  const { auth } = useAuthContext();
 
   useEffect(() => {
     window.scrollTo(0, 0);

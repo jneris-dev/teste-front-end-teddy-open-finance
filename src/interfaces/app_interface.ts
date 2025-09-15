@@ -4,14 +4,8 @@ import type { ShowModalState } from "./modal_interface";
 export interface AppContextData {
   theme: boolean;
   handleToggleTheme: () => void;
-  loadingScreen: boolean;
-  setLoadingScreen: (loading: boolean) => void;
   showModal: ShowModalState;
   setShowModal: (state: ShowModalState) => void;
-
-  auth: Auth | null;
-  handleLogin: (userName: string) => void;
-  handleLogout: () => void;
 
   filters: Filters;
   setFilters: (filters: Filters) => void;
@@ -26,6 +20,16 @@ export interface AppContextData {
   handleSelectedClient: (client: Client) => void;
   handleRemoveClient: (clientId: string) => void;
   handleClearClients: () => void;
+}
+
+export interface AuthContextData {
+  loadingScreen: boolean;
+  setLoadingScreen: (loading: boolean) => void;
+
+  auth: Auth | null;
+  setAuth: (auth: Auth) => void;
+  handleLogin: (userName: string) => void;
+  handleLogout: () => void;
 }
 
 export interface Filters {

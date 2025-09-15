@@ -1,13 +1,13 @@
 import { Navigate } from "react-router-dom";
 
-import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
 
 interface PublicRouteProps {
   children: React.ReactNode;
 }
 
 export function PublicRoute({ children }: PublicRouteProps) {
-  const { auth } = useAppContext();
+  const { auth } = useAuthContext();
 
   if (auth && auth.loggedIn) {
     return <Navigate to="/" replace />;

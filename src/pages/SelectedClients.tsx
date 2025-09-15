@@ -1,11 +1,14 @@
+import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
+
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import ClientCard from "../components/ClientCard";
 import Button from "../components/Button";
-import { useAppContext } from "../context/AppContext";
 
 function SelectedClients() {
-  const { auth, handleClearClients } = useAppContext();
+  const { auth } = useAuthContext();
+  const { handleClearClients } = useAppContext();
 
   return (
     <Layout>

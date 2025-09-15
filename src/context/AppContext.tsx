@@ -15,8 +15,8 @@ import type { ShowModalState } from "../interfaces/modal_interface";
 import type { Client, UsersResponse } from "../interfaces/client_interface";
 
 import api from "../services/api";
-import { formatDateTime } from "../util/formats";
 import { encrypt, decrypt } from "../util/crypto";
+import { useAuthContext } from "./AuthContext";
 
 interface AppContextProps {
   children: ReactElement;
@@ -25,7 +25,8 @@ interface AppContextProps {
 const AppContext = createContext({} as AppContextData);
 
 export function AppContextProvider({ children }: AppContextProps) {
-  const [auth, setAuth] = useState<Auth | null>(null);
+  const { setAuth } = useAuthContext();
+
   const [theme, setTheme] = useState(() => localStorage.theme === "dark");
   const [showModal, setShowModal] = useState<ShowModalState>({
     show: false,
@@ -36,7 +37,6 @@ export function AppContextProvider({ children }: AppContextProps) {
       title: null,
     },
   });
-  const [loadingScreen, setLoadingScreen] = useState(true);
 
   function handleToggleTheme() {
     setTheme(!theme);
@@ -65,91 +65,6 @@ export function AppContextProvider({ children }: AppContextProps) {
     const nextTheme = currentTheme ? "overflow-hidden" : "overflow-auto";
     rootElement.classList.add(nextTheme);
   }, [showModal]);
-
-  useEffect(() => {
-    const loadAuthAndSetDelay = async () => {
-      const delayPromise = new Promise((resolve) => setTimeout(resolve, 500));
-
-      const authPromise = new Promise((resolve) => {
-        const storedAuth = localStorage.getItem("authData");
-        if (storedAuth) {
-          try {
-            const authData: Auth = decrypt(storedAuth);
-            setAuth(authData);
-          } catch (error) {
-            console.error("Failed to parse auth data from localStorage", error);
-            localStorage.removeItem("authData");
-          }
-        }
-        resolve(null);
-      });
-
-      await Promise.all([authPromise, delayPromise]);
-
-      setLoadingScreen(false);
-    };
-
-    loadAuthAndSetDelay().catch(console.error);
-  }, []);
-
-  const handleLogin = (userName: string) => {
-    setLoadingScreen(true);
-
-    const storedAuth = localStorage.getItem("authData");
-    let currentAuth: Auth | null = null;
-    if (storedAuth) {
-      try {
-        currentAuth = decrypt(storedAuth);
-      } catch (e) {
-        console.error("Erro ao ler dados do localStorage", e);
-      }
-    }
-
-    let updatedAuth: Auth;
-
-    if (currentAuth && currentAuth.userName === userName) {
-      updatedAuth = {
-        ...currentAuth,
-        startSession: formatDateTime(new Date()),
-        loggedIn: true,
-      };
-    } else {
-      updatedAuth = {
-        userName,
-        startSession: formatDateTime(new Date()),
-        clients: [],
-        loggedIn: true,
-      };
-    }
-
-    localStorage.setItem("authData", encrypt(updatedAuth));
-    setAuth(updatedAuth);
-
-    setTimeout(() => setLoadingScreen(false), 500);
-  };
-
-  const handleLogout = () => {
-    setLoadingScreen(true);
-
-    const storedAuth = localStorage.getItem("authData");
-    if (storedAuth) {
-      try {
-        const currentAuth: Auth = decrypt(storedAuth);
-        const updatedAuth: Auth = {
-          ...currentAuth,
-          loggedIn: false,
-        };
-        localStorage.setItem("authData", encrypt(updatedAuth));
-        setAuth(updatedAuth);
-      } catch (e) {
-        console.error("Erro ao ler dados do localStorage para logout", e);
-        localStorage.removeItem("authData");
-        setAuth(null);
-      }
-    }
-
-    setTimeout(() => setLoadingScreen(false), 500);
-  };
 
   const [filters, setFilters] = useState({
     page: 1,
@@ -393,14 +308,8 @@ export function AppContextProvider({ children }: AppContextProps) {
       value={{
         theme,
         handleToggleTheme,
-        loadingScreen,
-        setLoadingScreen,
         showModal,
         setShowModal,
-
-        auth,
-        handleLogin,
-        handleLogout,
 
         filters,
         setFilters,
