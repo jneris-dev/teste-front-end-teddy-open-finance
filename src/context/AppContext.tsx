@@ -3,7 +3,7 @@ import {
   useContext,
   useState,
   useEffect,
-  type ReactElement,
+  type ReactNode,
 } from "react";
 
 import type {
@@ -19,7 +19,7 @@ import { encrypt, decrypt } from "../util/crypto";
 import { useAuthContext } from "./AuthContext";
 
 interface AppContextProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const AppContext = createContext({} as AppContextData);

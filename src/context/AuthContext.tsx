@@ -3,7 +3,7 @@ import {
   useContext,
   useState,
   useEffect,
-  type ReactElement,
+  type ReactNode,
 } from "react";
 
 import type { AuthContextData, Auth } from "../interfaces/app_interface";
@@ -11,7 +11,7 @@ import { formatDateTime } from "../util/formats";
 import { encrypt, decrypt } from "../util/crypto";
 
 interface AuthContextProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const AuthContext = createContext({} as AuthContextData);
