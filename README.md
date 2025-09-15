@@ -3,14 +3,15 @@
 Este projeto é uma aplicação web desenvolvida como um teste técnico para front-end. O objetivo é simular um sistema de gerenciamento de clientes para uma plataforma de Open Finance, permitindo o cadastro, visualização, edição e exclusão de dados de clientes de forma segura e eficiente.
 
 ### 🚀 Visite a Aplicação
+
 ---
 
 Acesse a versão em produção da aplicação clicando no link abaixo:
 
 [**🔗 Visitar Aplicação em Produção**](https://teste-front-end-teddy-open-finance.vercel.app)
 
-
 ### ⚙️ Funcionalidades
+
 ---
 
 - **Autenticação:** Sistema de login simulado para acesso ao painel de controle.
@@ -24,6 +25,7 @@ Acesse a versão em produção da aplicação clicando no link abaixo:
 - **Gerenciamento de Estado:** Utiliza `localStorage` para persistência de dados de autenticação e clientes.
 
 ### 🧪 Tecnologias Utilizadas
+
 ---
 
 O projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
@@ -34,11 +36,13 @@ O projeto foi construído utilizando as seguintes tecnologias e bibliotecas:
 - **Axios:** Cliente HTTP para comunicação com a API.
 - **Vitest:** Framework de testes unitários e de integração.
 - **TailwindCSS:** Framework CSS para estilização da aplicação.
+- **Phosphor Icons:** Biblioteca de icones.
 - **Crypto-JS:** Biblioteca para criptografia e segurança de dados.
 - **react-router-dom:** Gerenciamento de rotas.
 - **Docker:** Para containerização e execução da aplicação em um ambiente isolado.
 
 ### 🔧 Instalação e Execução
+
 ---
 
 Para rodar o projeto localmente, siga os passos abaixo:
@@ -82,6 +86,7 @@ docker run -p 8080:80 meu-app-react:1.0
 A aplicação estará acessível em `http://localhost:8080`.
 
 ### ✔️ Testes
+
 ---
 
 Para executar os testes unitários e de integração do projeto, use o seguinte comando:
@@ -99,6 +104,7 @@ npm run test:watch
 ```
 
 ### 🔑 Variáveis de Ambiente
+
 ---
 
 A aplicação utiliza variáveis de ambiente para a conexão com a API e para a criptografia.
@@ -107,6 +113,7 @@ A aplicação utiliza variáveis de ambiente para a conexão com a API e para a 
 - As variáveis já estão preenchidas com os valores necessários para a avaliação do projeto. Não é necessário fazer nenhuma alteração, a menos que você queira apontar para outro endpoint.
 
 ### 📁 Estrutura do Projeto
+
 ---
 
 A estrutura de diretórios do projeto segue a convenção padrão para aplicações React:
@@ -136,6 +143,7 @@ A estrutura de diretórios do projeto segue a convenção padrão para aplicaç�
 ```
 
 ### 📦 Construção do Projeto
+
 ---
 
 Para gerar uma versão de produção da aplicação (otimizada para velocidade e tamanho), use o seguinte comando:
